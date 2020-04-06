@@ -1,0 +1,206 @@
+{
+	"publisher": "riswu",
+	"name": "vscode-sticky-selection",
+	"displayName": "Sticky Selection",
+	"description": "This extension provides sticky-selection (region in Emacs) that supports multiple cursors and multiple tabs.",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.43.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "sticky-selection.enterStickySelectionMode",
+				"title": "Enter Sticky Selection Mode"
+			},
+			{
+				"command": "sticky-selection.exitStickySelectionMode",
+				"title": "Exit Sticky Selection Mode"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Sticky Selection",
+			"properties": {
+				"sticky-selection.exitCommands": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"title": "Exit command",
+						"properties": {
+							"command": {
+								"type": "string",
+								"description": "Command"
+							},
+							"args": {
+								"type": "object",
+								"description": "Arguments for this command"
+							}
+						}
+					},
+					"description": "Exit Commands"
+				}
+			}
+		},
+		"keybindings": [
+			{
+				"key": "ctrl+space",
+				"command": "sticky-selection.enterStickySelectionMode",
+				"when": "editorTextFocus"
+			},
+			{
+				"key": "escape",
+				"command": "sticky-selection.exitStickySelectionMode",
+				"when": "!editorHasMultipleSelections && editorTextFocus && inStickySelectionMode"
+			},
+			{
+				"key": "down",
+				"command": "cursorDownSelect",
+				"when": "editorTextFocus && inStickySelectionMode"
+			},
+			{
+				"key": "left",
+				"command": "cursorLeftSelect",
+				"when": "editorTextFocus && inStickySelectionMode"
+			},
+			{
+				"key": "right",
+				"command": "cursorRightSelect",
+				"when": "editorTextFocus && inStickySelectionMode"
+			},
+			{
+				"key": "up",
+				"command": "cursorUpSelect",
+				"when": "editorTextFocus && inStickySelectionMode"
+			},
+			{
+				"key": "ctrl+n",
+				"command": "cursorDownSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "ctrl+b",
+				"command": "cursorLeftSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "ctrl+f",
+				"command": "cursorRightSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "ctrl+p",
+				"command": "cursorUpSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "end",
+				"command": "cursorEndSelect",
+				"when": "editorTextFocus && inStickySelectionMode"
+			},
+			{
+				"key": "home",
+				"command": "cursorHomeSelect",
+				"when": "editorTextFocus && inStickySelectionMode"
+			},
+			{
+				"key": "cmd+right",
+				"command": "cursorEndSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "cmd+left",
+				"command": "cursorHomeSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "ctrl+e",
+				"command": "cursorEndSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "ctrl+a",
+				"command": "sticky-selection.cursorLineStartSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "ctrl+end",
+				"command": "cursorBottomSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isWindows"
+			},
+			{
+				"key": "ctrl+home",
+				"command": "cursorTopSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isWindows"
+			},
+			{
+				"key": "cmd+down",
+				"command": "cursorBottomSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "cmd+up",
+				"command": "cursorTopSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "pagedown",
+				"command": "cursorPageDownSelect",
+				"when": "editorTextFocus && inStickySelectionMode"
+			},
+			{
+				"key": "pageup",
+				"command": "cursorPageUpSelect",
+				"when": "editorTextFocus && inStickySelectionMode"
+			},
+			{
+				"key": "alt+right",
+				"command": "cursorWordEndRightSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "alt+left",
+				"command": "cursorWordStartLeftSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "ctrl+alt+right",
+				"command": "cursorWordPartRightSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			},
+			{
+				"key": "ctrl+alt+left",
+				"command": "cursorWordPartLeftSelect",
+				"when": "editorTextFocus && inStickySelectionMode && isMac"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^7.0.1",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.43.0",
+		"eslint": "^6.8.0",
+		"@typescript-eslint/parser": "^2.18.0",
+		"@typescript-eslint/eslint-plugin": "^2.18.0",
+		"glob": "^7.1.6",
+		"mocha": "^7.0.1",
+		"typescript": "^3.7.5",
+		"vscode-test": "^1.3.0"
+	}
+}
