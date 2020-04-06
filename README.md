@@ -16,7 +16,7 @@ This extension contributes the following settings:
 ```json
 {
   "sticky-selection.exitCommands": [
-	  {
+    {
       "command": "deleteLeft"
     },
     {
@@ -39,7 +39,7 @@ This extension contributes the following settings:
 
 ```json
 [
-	{
+  {
     "key": "backspace",
     "command": "sticky-selection.deleteLeft",
     "when": "editorTextFocus && inStickySelectionMode"
