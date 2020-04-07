@@ -24,12 +24,17 @@ export function activate(context: vscode.ExtensionContext) {
     controller.enterStickySelectionMode();
   }));
 
-  context.subscriptions.push(vscode.commands.registerCommand('sticky-selection.exitStickySelectionMode', () => {
+  context.subscriptions.push(vscode.commands.registerCommand('sticky-selection.exitStickySelectionMode', args => {
     const editor = vscode.window.activeTextEditor;
     if (!editor) return;
 
     const controller = getOrCreateController(editor);
-    controller.exitStickySelectionMode(editor);
+    if (args && args.command) {
+      const command = new Command(args.command, args.args ? args.args : null);
+      controller.exitStickySelectionMode(editor, command);
+    } else {
+      controller.exitStickySelectionMode(editor);
+    }
   }));
 
   context.subscriptions.push(vscode.commands.registerCommand('type', args => {
@@ -52,7 +57,7 @@ export function activate(context: vscode.ExtensionContext) {
       if (key === document.fileName) {
         controllers.delete(key);
       }
-    })
+    });
   });
 
   context.subscriptions.push(vscode.commands.registerCommand('sticky-selection.cursorLineStartSelect', () => {
@@ -64,31 +69,6 @@ export function activate(context: vscode.ExtensionContext) {
       return new vscode.Selection(selection.anchor, active.with(active.line, 0));
     });
   }));
-
-  interface ExitCommandSettings {
-    command: string;
-    args?: object;
-  }
-
-  function switchCommand(command: Command) {
-    context.subscriptions.push(vscode.commands.registerCommand(`sticky-selection.${command.name}`, () => {
-      const editor = vscode.window.activeTextEditor;
-      if (!editor) return;
-
-      console.log(command);
-      const controller = getOrCreateController(editor);
-      controller.exitStickySelectionMode(editor, command);
-    }));
-  }
-
-  const configuration = vscode.workspace.getConfiguration("sticky-selection");
-  const exitCommandSettings = configuration.get<Array<ExitCommandSettings>>("exitCommands");
-  if (exitCommandSettings) {
-    exitCommandSettings.forEach(settings => {
-      const command = new Command(settings.command, settings.args ? settings.args : null);
-      switchCommand(command);
-    })
-  }
 }
 
 export function deactivate() {

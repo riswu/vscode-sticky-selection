@@ -2,72 +2,16 @@
 
 This extension provides sticky-selection (region in Emacs) that supports multiple cursors and multiple tabs.
 
-## Extension Settings
+## Extension Commands
 
-This extension contributes the following settings:
+This extension contributes the following commands:
 
-* `sticky-selection.enable`: enable/disable this extension
-* `sticky-selection.exitCommands`: generate commands to exit sticky-selection-mode after execution
+- `enterStickySelectionMode`: Enter sticky-selection-mode
+- `exitStickySelectionMode`: Exit sticky-selection-mode
 
-### Example
+## Extension Keybindings
 
-`settings.json`:
-
-```json
-{
-  "sticky-selection.exitCommands": [
-    {
-      "command": "deleteLeft"
-    },
-    {
-      "command": "deleteRight"
-    },
-    {
-      "command": "editor.action.clipboardCutAction"
-    },
-    {
-      "command": "editor.action.clipboardCopyAction"
-    },
-    {
-      "command": "editor.action.clipboardPasteAction"
-    }
-  ]
-}
-```
-
-`keybindings.json`:
-
-```json
-[
-  {
-    "key": "backspace",
-    "command": "sticky-selection.deleteLeft",
-    "when": "editorTextFocus && inStickySelectionMode"
-  },
-  {
-    "key": "delete",
-    "command": "sticky-selection.deleteRight",
-    "when": "editorTextFocus && inStickySelectionMode"
-  },
-  {
-    "key": "cmd+x",
-    "command": "sticky-selection.editor.action.clipboardCutAction",
-    "when": "editorTextFocus && !editorReadonly && inStickySelectionMode"
-  },
-  {
-    "key": "cmd+c",
-    "command": "sticky-selection.editor.action.clipboardCopyAction",
-    "when": "editorTextFocus && inStickySelectionMode"
-  },
-  {
-    "key": "cmd+v",
-    "command": "sticky-selection.editor.action.clipboardPasteAction",
-    "when": "editorTextFocus && !editorReadonly && inStickySelectionMode"
-  }
-]
-```
-
-## Keybindings
+This extension contributes the following keybindings:
 
 | Key | Description |
 |---|-----------|
@@ -125,8 +69,47 @@ If you are an Emacs user, you can enable the mode for `ctrl+v` and `alt+v` by ed
 ]
 ```
 
+In such manners, you can support other move commands including those of third parties.
+
+By default, sticky-selection-mode continues even if you execute commands such as cut and paste. You can exit the mode after execution by taking these commands as arguments to exitStickySelectionMode as follows:
+
+```json
+[
+  {
+    "key": "cmd+x",
+    "command": "sticky-selection.exitStickySelectionMode",
+    "args": {
+      "command": "editor.action.clipboardCutAction"
+    },
+    "when": "editorTextFocus && !editorReadonly && inStickySelectionMode"
+  },
+  {
+    "key": "cmd+c",
+    "command": "sticky-selection.exitStickySelectionMode",
+    "args": {
+      "command": "editor.action.clipboardCopyAction"
+    },
+    "when": "editorTextFocus && inStickySelectionMode"
+  },
+  {
+    "key": "cmd+v",
+    "command": "sticky-selection.exitStickySelectionMode",
+    "args": {
+      "command": "editor.action.clipboardPasteAction"
+    },
+    "when": "editorTextFocus && !editorReadonly && inStickySelectionMode"
+  }
+]
+```
+
+In such manners, you can support other commands such as `backspace` and `delete`.
+
 ## Release Notes
+
+### 1.1.0
+
+Change `exitStickySelectionMode` to take a command to execute before exiting sticky-selection-mode as an argument.
 
 ### 1.0.0
 
-Initial release
+Initial release.
