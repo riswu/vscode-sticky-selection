@@ -6,8 +6,8 @@ This extension provides sticky-selection (region in Emacs) that supports multipl
 
 This extension contributes the following commands:
 
-- `enterStickySelectionMode`: Enter sticky-selection-mode
-- `exitStickySelectionMode`: Exit sticky-selection-mode
+- `sticky-selection.enterStickySelectionMode`: Enter sticky-selection-mode
+- `sticky-selection.exitStickySelectionMode`: Exit sticky-selection-mode
 
 ## Extension Keybindings
 
@@ -71,7 +71,7 @@ If you are an Emacs user, you can enable the mode for `ctrl+v` and `alt+v` by ed
 
 In such manners, you can support other move commands including those of third parties.
 
-By default, sticky-selection-mode continues even if you execute commands such as cut and paste. You can exit the mode after execution by taking these commands as arguments to exitStickySelectionMode as follows:
+By default, sticky-selection-mode continues even if you execute commands such as cut and paste. You can exit the mode after execution by taking these commands as arguments to `sticky-selection.exitStickySelectionMode` as follows:
 
 ```json
 [
@@ -79,7 +79,8 @@ By default, sticky-selection-mode continues even if you execute commands such as
     "key": "cmd+x",
     "command": "sticky-selection.exitStickySelectionMode",
     "args": {
-      "command": "editor.action.clipboardCutAction"
+      "command": "editor.action.clipboardCutAction",
+      "interval": 100
     },
     "when": "editorTextFocus && !editorReadonly && inStickySelectionMode"
   },
@@ -87,7 +88,8 @@ By default, sticky-selection-mode continues even if you execute commands such as
     "key": "cmd+c",
     "command": "sticky-selection.exitStickySelectionMode",
     "args": {
-      "command": "editor.action.clipboardCopyAction"
+      "command": "editor.action.clipboardCopyAction",
+      "interval": 100
     },
     "when": "editorTextFocus && inStickySelectionMode"
   },
@@ -95,7 +97,8 @@ By default, sticky-selection-mode continues even if you execute commands such as
     "key": "cmd+v",
     "command": "sticky-selection.exitStickySelectionMode",
     "args": {
-      "command": "editor.action.clipboardPasteAction"
+      "command": "editor.action.clipboardPasteAction",
+      "interval": 100
     },
     "when": "editorTextFocus && !editorReadonly && inStickySelectionMode"
   }
@@ -106,9 +109,13 @@ In such manners, you can support other commands such as `backspace` and `delete`
 
 ## Release Notes
 
+### 1.2.0
+
+Change `sticky-selection.exitStickySelectionMode` to take the interval before exiting sticky-selection-mode after executing the argument command as an argument.
+
 ### 1.1.0
 
-Change `exitStickySelectionMode` to take a command to execute before exiting sticky-selection-mode as an argument.
+Change `sticky-selection.exitStickySelectionMode` to take a command to execute before exiting sticky-selection-mode as an argument.
 
 ### 1.0.0
 

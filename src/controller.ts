@@ -17,9 +17,12 @@ export default class Controller {
     await this.ensureContext();
   }
 
-  async exitStickySelectionMode(editor: vscode.TextEditor, command?: Command) {
+  async exitStickySelectionMode(editor: vscode.TextEditor, command?: Command, interval?: number) {
     if (command !== undefined) {
       await command.execute();
+      if (interval !== undefined && 0 < interval) {
+        await new Promise(res => setTimeout(res, interval));
+      }
     }
     this.removeSelections(editor);
     this.isInStickySelectionMode = false;

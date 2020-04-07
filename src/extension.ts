@@ -16,40 +16,44 @@ export function activate(context: vscode.ExtensionContext) {
     }
   }
 
-  context.subscriptions.push(vscode.commands.registerCommand('sticky-selection.enterStickySelectionMode', () => {
+  context.subscriptions.push(vscode.commands.registerCommand('sticky-selection.enterStickySelectionMode', async () => {
     const editor = vscode.window.activeTextEditor;
     if (!editor) return;
 
     const controller = getOrCreateController(editor);
-    controller.enterStickySelectionMode();
+    await controller.enterStickySelectionMode();
   }));
 
-  context.subscriptions.push(vscode.commands.registerCommand('sticky-selection.exitStickySelectionMode', args => {
+  context.subscriptions.push(vscode.commands.registerCommand('sticky-selection.exitStickySelectionMode', async args => {
     const editor = vscode.window.activeTextEditor;
     if (!editor) return;
 
     const controller = getOrCreateController(editor);
     if (args && args.command) {
       const command = new Command(args.command, args.args ? args.args : null);
-      controller.exitStickySelectionMode(editor, command);
+      if (args.interval) {
+        await controller.exitStickySelectionMode(editor, command, args.interval);
+      } else {
+        await controller.exitStickySelectionMode(editor, command);
+      }
     } else {
-      controller.exitStickySelectionMode(editor);
+      await controller.exitStickySelectionMode(editor);
     }
   }));
 
-  context.subscriptions.push(vscode.commands.registerCommand('type', args => {
+  context.subscriptions.push(vscode.commands.registerCommand('type', async args => {
     const editor = vscode.window.activeTextEditor;
     if (!editor) return;
 
     const controller = getOrCreateController(editor);
-    controller.type(args);
+    await controller.type(args);
   }));
 
-  vscode.window.onDidChangeActiveTextEditor(editor => {
+  vscode.window.onDidChangeActiveTextEditor(async editor => {
     if (!editor) return;
 
     const controller = getOrCreateController(editor);
-    controller.activate();
+    await controller.activate();
   });
 
   vscode.workspace.onDidCloseTextDocument(document => {
