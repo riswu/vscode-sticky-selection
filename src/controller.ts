@@ -21,7 +21,7 @@ export default class Controller {
     if (command !== undefined) {
       await command.execute();
       if (interval !== undefined && 0 < interval) {
-        await new Promise(res => setTimeout(res, interval));
+        await new Promise((res) => setTimeout(res, interval));
       }
     }
     this.removeSelections(editor);
@@ -30,14 +30,14 @@ export default class Controller {
   }
 
   removeSelections(editor: vscode.TextEditor) {
-    editor.selections = editor.selections.map(selection => {
+    editor.selections = editor.selections.map((selection) => {
       const active = selection.active;
       return new vscode.Selection(active, active);
     });
   }
 
   async type(args: any) {
-    await vscode.commands.executeCommand("default:type", args);
+    await vscode.commands.executeCommand('default:type', args);
     this.isInStickySelectionMode = false;
     await this.ensureContext();
   }
