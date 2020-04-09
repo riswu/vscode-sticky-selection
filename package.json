@@ -3,7 +3,7 @@
   "name": "vscode-sticky-selection",
   "displayName": "Sticky Selection",
   "description": "sticky-selection (region in Emacs) that supports multiple cursors and multiple tabs",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "MIT",
   "icon": "images/icon.png",
   "repository": {
