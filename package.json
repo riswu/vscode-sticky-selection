@@ -5,6 +5,7 @@
   "description": "This extension provides sticky-selection (region in Emacs) that supports multiple cursors and multiple tabs.",
   "version": "1.2.0",
   "license": "MIT",
+  "icon": "images/icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/riswu/vscode-sticky-selection"
