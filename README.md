@@ -13,34 +13,34 @@ This extension contributes the following commands:
 
 This extension contributes the following keybindings:
 
-| Key | Description |
-|---|-----------|
-| ctrl+space | Enter sticky-selection-mode |
-| escape | Exit sticky-selection-mode |
-| down | Execute `cursorDownSelect` when in sticky-selection-mode |
-| left | Execute `cursorLeftSelect` when in sticky-selection-mode |
-| right | Execute `cursorRightSelect` when in sticky-selection-mode |
-| up | Execute `cursorUpSelect` when in sticky-selection-mode |
-| ctrl+n | Execute `cursorDownSelect` when in sticky-selection-mode (macOS) |
-| ctrl+b | Execute `cursorLeftSelect` when in sticky-selection-mode (macOS) |
-| ctrl+f | Execute `cursorRightSelect` when in sticky-selection-mode (macOS) |
-| ctrl+p | Execute `cursorUpSelect` when in sticky-selection-mode (macOS) |
-| end | Execute `cursorEndSelect` when in sticky-selection-mode |
-| home | Execute `cursorHomeSelect` when in sticky-selection-mode |
-| cmd+right | Execute `cursorEndSelect` when in sticky-selection-mode (macOS) |
-| cmd+left | Execute `cursorHomeSelect` when in sticky-selection-mode (macOS) |
-| ctrl+e | Execute `cursorEndSelect` when in sticky-selection-mode (macOS) |
-| ctrl+a | Execute `cursorLineStart` with selection when in sticky-selection-mode (macOS) |
-| ctrl+end | Execute `cursorBottomSelect` when in sticky-selection-mode (Windows) |
-| ctrl+home | Execute `cursorTopSelect` when in sticky-selection-mode (Windows) |
-| cmd+down | Execute `cursorBottomSelect` when in sticky-selection-mode (macOS) |
-| cmd+up | Execute `cursorTopSelect` when in sticky-selection-mode (macOS) |
-| pagedown | Execute `cursorPageDownSelect` when in sticky-selection-mode |
-| pageup | Execute `cursorPageUpSelect` when in sticky-selection-mode |
-| alt+right | Execute `cursorWordEndRightSelect` when in sticky-selection-mode (macOS) |
-| alt+left | Execute `cursorWordStartLeftSelect` when in sticky-selection-mode (macOS)
-| ctrl+alt+right | Execute `cursorWordPartRightSelect` when in sticky-selection-mode (macOS) |
-| ctrl+alt+left | Execute `cursorWordPartLeftSelect` when in sticky-selection-mode (macOS) |
+| Key            | Description                                                                          |
+| -------------- | ------------------------------------------------------------------------------------ |
+| ctrl+space     | Enter sticky-selection-mode                                                          |
+| escape         | Exit sticky-selection-mode                                                           |
+| down           | Execute `cursorDownSelect` when in sticky-selection-mode                             |
+| left           | Execute `cursorLeftSelect` when in sticky-selection-mode                             |
+| right          | Execute `cursorRightSelect` when in sticky-selection-mode                            |
+| up             | Execute `cursorUpSelect` when in sticky-selection-mode                               |
+| ctrl+n         | Execute `cursorDownSelect` when in sticky-selection-mode (macOS)                     |
+| ctrl+b         | Execute `cursorLeftSelect` when in sticky-selection-mode (macOS)                     |
+| ctrl+f         | Execute `cursorRightSelect` when in sticky-selection-mode (macOS)                    |
+| ctrl+p         | Execute `cursorUpSelect` when in sticky-selection-mode (macOS)                       |
+| end            | Execute `cursorEndSelect` when in sticky-selection-mode                              |
+| home           | Execute `cursorHomeSelect` when in sticky-selection-mode                             |
+| cmd+right      | Execute `cursorEndSelect` when in sticky-selection-mode (macOS)                      |
+| cmd+left       | Execute `cursorHomeSelect` when in sticky-selection-mode (macOS)                     |
+| ctrl+e         | Execute `cursorLineEndSelect` when in sticky-selection-mode (macOS)                  |
+| ctrl+a         | Execute `cursorLineStartSelect` with selection when in sticky-selection-mode (macOS) |
+| ctrl+end       | Execute `cursorBottomSelect` when in sticky-selection-mode (Windows)                 |
+| ctrl+home      | Execute `cursorTopSelect` when in sticky-selection-mode (Windows)                    |
+| cmd+down       | Execute `cursorBottomSelect` when in sticky-selection-mode (macOS)                   |
+| cmd+up         | Execute `cursorTopSelect` when in sticky-selection-mode (macOS)                      |
+| pagedown       | Execute `cursorPageDownSelect` when in sticky-selection-mode                         |
+| pageup         | Execute `cursorPageUpSelect` when in sticky-selection-mode                           |
+| alt+right      | Execute `cursorWordEndRightSelect` when in sticky-selection-mode (macOS)             |
+| alt+left       | Execute `cursorWordLeftSelect` when in sticky-selection-mode (macOS)                 |
+| ctrl+alt+right | Execute `cursorWordPartRightSelect` when in sticky-selection-mode (macOS)            |
+| ctrl+alt+left  | Execute `cursorWordPartLeftSelect` when in sticky-selection-mode (macOS)             |
 
 If you are an Emacs user, you can enable the mode for `ctrl+v` and `alt+v` by editing `keybindings.json` as follows:
 
